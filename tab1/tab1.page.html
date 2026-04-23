@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Item List & Search</ion-title>
+    <!-- 右上角HELP文字 -->
+    <ion-button slot="end" color="light" (click)="showHelp()">HELP</ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <!-- 搜索框 -->
+  <ion-searchbar [(ngModel)]="keyword"
+                 (search)="search()"
+                 placeholder="Search item name..."
+                 animated></ion-searchbar>
+
+  <!-- 每个物品完整信息+卡片排版 -->
+  <ion-list>
+    <ion-item lines="inset" *ngFor="let item of items">
+      <ion-label>
+        <!-- 第一行显示物品名称 -->
+        <h2><strong>{{ item.item_name }}</strong></h2>
+        <p>ID: {{ item.item_id }} | Category: {{ item.category }}</p>
+        <p>Price: ${{ item.price }} | Stock Status: {{ item.stock_status }}</p>
+        <p>Supplier: {{ item.supplier_name }}</p>
+        <p>Featured Item: {{ item.featured_item === 1 ? 'Yes' : 'No' }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <!-- 空数据提示 -->
+  <div *ngIf="items.length === 0" class="empty-tip">
+    No items found
+  </div>
+</ion-content>

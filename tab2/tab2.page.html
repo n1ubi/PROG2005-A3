@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Add Item</ion-title>
+    <ion-button slot="end" color="light" (click)="showHelp()">Help</ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-input label="Item Name *" [(ngModel)]="item_name" placeholder="Enter unique item name"></ion-input>
+  <ion-select label="Category *" [(ngModel)]="category">
+    <ion-select-option value="Electronics">Electronics</ion-select-option>
+    <ion-select-option value="Furniture">Furniture</ion-select-option>
+    <ion-select-option value="Clothing">Clothing</ion-select-option>
+    <ion-select-option value="Tools">Tools</ion-select-option>
+    <ion-select-option value="Miscellaneous">Miscellaneous</ion-select-option>
+  </ion-select>
+  <ion-input label="Quantity *" type="number" [(ngModel)]="quantity"></ion-input>
+  <ion-input label="Price *" type="number" [(ngModel)]="price"></ion-input>
+  <ion-input label="Supplier Name *" [(ngModel)]="supplier_name"></ion-input>
+  <ion-select label="Featured Item" [(ngModel)]="featured_item">
+    <ion-select-option value="0">No</ion-select-option>
+    <ion-select-option value="1">Yes</ion-select-option>
+  </ion-select>
+  <ion-input label="Special Note" [(ngModel)]="special_note"></ion-input>
+
+  <ion-button expand="full" class="ion-margin-top" (click)="add()">Add Item</ion-button>
+</ion-content>

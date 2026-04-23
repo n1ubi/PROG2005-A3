@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Edit & Delete</ion-title>
+    <ion-button slot="end" color="light" (click)="showHelp()">HELP</ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Load Item</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-input label="Item Name" [(ngModel)]="item_name" placeholder="Enter name"></ion-input>
+      </ion-item>
+      <ion-button expand="full" (click)="load()">Load Item</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Edit Information</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-select label="Category" [(ngModel)]="category">
+          <ion-select-option value="Electronics">Electronics</ion-select-option>
+          <ion-select-option value="Furniture">Furniture</ion-select-option>
+          <ion-select-option value="Clothing">Clothing</ion-select-option>
+          <ion-select-option value="Tools">Tools</ion-select-option>
+          <ion-select-option value="Miscellaneous">Miscellaneous</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-input label="Quantity" type="number" [(ngModel)]="quantity"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input label="Price" type="number" [(ngModel)]="price"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input label="Supplier Name" [(ngModel)]="supplier_name"></ion-input>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button expand="full" color="success" (click)="update()">Update Item</ion-button>
+  <ion-button expand="full" color="danger" (click)="delete()">Delete Item</ion-button>
+</ion-content>

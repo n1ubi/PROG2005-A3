@@ -1,0 +1,4 @@
+npm install -g @ionic/cli
+ionic start inventoryA3 tabs --type=angular
+cd inventoryA3
+ionic serve

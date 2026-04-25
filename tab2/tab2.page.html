@@ -1,27 +1,64 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Add Item</ion-title>
-    <ion-button slot="end" color="light" (click)="showHelp()">Help</ion-button>
+  <ion-toolbar color="success">
+    <ion-title class="ion-text-center">➕ Add New Item</ion-title>
+    <ion-button slot="end" color="light" (click)="showHelp()">HELP</ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-input label="Item Name *" [(ngModel)]="item_name" placeholder="Enter unique item name"></ion-input>
-  <ion-select label="Category *" [(ngModel)]="category">
-    <ion-select-option value="Electronics">Electronics</ion-select-option>
-    <ion-select-option value="Furniture">Furniture</ion-select-option>
-    <ion-select-option value="Clothing">Clothing</ion-select-option>
-    <ion-select-option value="Tools">Tools</ion-select-option>
-    <ion-select-option value="Miscellaneous">Miscellaneous</ion-select-option>
-  </ion-select>
-  <ion-input label="Quantity *" type="number" [(ngModel)]="quantity"></ion-input>
-  <ion-input label="Price *" type="number" [(ngModel)]="price"></ion-input>
-  <ion-input label="Supplier Name *" [(ngModel)]="supplier_name"></ion-input>
-  <ion-select label="Featured Item" [(ngModel)]="featured_item">
-    <ion-select-option value="0">No</ion-select-option>
-    <ion-select-option value="1">Yes</ion-select-option>
-  </ion-select>
-  <ion-input label="Special Note" [(ngModel)]="special_note"></ion-input>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title class="ion-text-center">New Inventory Item</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label position="stacked">Item Name *</ion-label>
+          <ion-input [(ngModel)]="item_name" placeholder="Enter unique item name"></ion-input>
+        </ion-item>
 
-  <ion-button expand="full" class="ion-margin-top" (click)="add()">Add Item</ion-button>
+        <ion-item>
+          <ion-label position="stacked">Category *</ion-label>
+          <ion-select [(ngModel)]="category">
+            <ion-select-option value="Electronics">Electronics</ion-select-option>
+            <ion-select-option value="Furniture">Furniture</ion-select-option>
+            <ion-select-option value="Clothing">Clothing</ion-select-option>
+            <ion-select-option value="Tools">Tools</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Quantity *</ion-label>
+          <ion-input type="number" [(ngModel)]="quantity"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Price *</ion-label>
+          <ion-input type="number" [(ngModel)]="price"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Supplier Name *</ion-label>
+          <ion-input [(ngModel)]="supplier_name" placeholder="Enter supplier name"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Featured Item</ion-label>
+          <ion-select [(ngModel)]="featured_item">
+            <ion-select-option value="0">No</ion-select-option>
+            <ion-select-option value="1">Yes</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Special Note</ion-label>
+          <ion-input [(ngModel)]="special_note" placeholder="Optional notes"></ion-input>
+        </ion-item>
+      </ion-list>
+
+      <ion-button expand="block" color="success" class="ion-margin-top" (click)="add()">
+        Add Item
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

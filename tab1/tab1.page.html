@@ -1,7 +1,6 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Item List & Search</ion-title>
-    <!-- 右上角HELP文字 -->
+    <ion-title class="ion-text-center">📦 Inventory List</ion-title>
     <ion-button slot="end" color="light" (click)="showHelp()">HELP</ion-button>
   </ion-toolbar>
 </ion-header>
@@ -9,26 +8,34 @@
 <ion-content class="ion-padding">
   <!-- 搜索框 -->
   <ion-searchbar [(ngModel)]="keyword"
-                 (search)="search()"
-                 placeholder="Search item name..."
-                 animated></ion-searchbar>
+                 (ionChange)="search()"
+                 placeholder="Search by item name..."
+                 animated
+                 color="light"></ion-searchbar>
 
-  <!-- 每个物品完整信息+卡片排版 -->
-  <ion-list>
-    <ion-item lines="inset" *ngFor="let item of items">
-      <ion-label>
-        <!-- 第一行显示物品名称 -->
-        <h2><strong>{{ item.item_name }}</strong></h2>
-        <p>ID: {{ item.item_id }} | Category: {{ item.category }}</p>
-        <p>Price: ${{ item.price }} | Stock Status: {{ item.stock_status }}</p>
-        <p>Supplier: {{ item.supplier_name }}</p>
-        <p>Featured Item: {{ item.featured_item === 1 ? 'Yes' : 'No' }}</p>
-      </ion-label>
-    </ion-item>
+  <!-- 列表卡片式布局 -->
+  <ion-list class="ion-padding-top">
+    <ion-card *ngFor="let item of items" class="shadow">
+      <ion-card-header color="light">
+        <ion-card-title class="fw-bold">{{ item.item_name }}</ion-card-title>
+        <ion-card-subtitle>ID: {{ item.item_id }} | {{ item.category }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="d-flex justify-between">
+          <span>💰 Price: ${{ item.price }}</span>
+          <span [ngClass]="{'text-success': item.stock_status === 'In stock', 'text-danger': item.stock_status !== 'In stock'}">
+            {{ item.stock_status }}
+          </span>
+        </div>
+        <p class="text-muted mt-2">Supplier: {{ item.supplier_name }}</p>
+        <ion-badge color="tertiary" *ngIf="item.featured_item === 1">Featured</ion-badge>
+      </ion-card-content>
+    </ion-card>
   </ion-list>
 
-  <!-- 空数据提示 -->
-  <div *ngIf="items.length === 0" class="empty-tip">
-    No items found
+  <!-- 空状态提示 -->
+  <div *ngIf="items.length === 0" class="ion-text-center ion-padding">
+    <ion-icon name="cube-outline" size="large" color="medium"></ion-icon>
+    <p class="text-muted">No items found</p>
   </div>
 </ion-content>

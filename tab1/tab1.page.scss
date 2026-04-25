@@ -1,21 +1,25 @@
-.empty-tip {
-  text-align: center;
-  margin-top: 40px;
+ion-card {
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.text-success {
+  color: #2dd36f;
+}
+
+.text-danger {
+  color: #eb445a;
+}
+
+.text-muted {
   color: #666;
-  font-size: 16px;
-}
-
-ion-item {
-  border-radius: 8px;
-  margin-bottom: 8px;
-}
-
-h2 {
-  color: #2c82c9;
-  margin-bottom: 6px;
-}
-
-p {
-  margin: 4px 0;
-  color: #444;
+  font-size: 0.9em;
 }

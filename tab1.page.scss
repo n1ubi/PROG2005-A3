@@ -1,0 +1,25 @@
+ion-card {
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.text-success {
+  color: #2dd36f;
+}
+
+.text-danger {
+  color: #eb445a;
+}
+
+.text-muted {
+  color: #666;
+  font-size: 0.9em;
+}

@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-toolbar color="primary" style="display: flex; justify-content: center; align-items: center;">
+    <ion-title style="position: absolute; text-align: center; left: 0; right: 0; margin: 0 auto;">📦 Inventory List</ion-title>
+    <ion-button slot="end" color="light" (click)="showHelp()">HELP</ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" style="background-color: var(--bg-color); color: var(--text-color);">
+  <!-- 搜索框 -->
+  <div>
+    <ion-searchbar [(ngModel)]="keyword"
+                   (ionChange)="search()"
+                   (ionFocus)="toggleHistory()"
+                   placeholder="Search by item name..."
+                   animated
+                   color="light"></ion-searchbar>
+
+    <!-- 搜索历史 -->
+    <div *ngIf="showHistory && searchHistory.length > 0" class="hover-glow" style="background-color: var(--card-bg); border-radius: 0 0 8px 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); padding: 16px; margin-top: -8px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+        <h3 style="color: var(--button-bg); margin: 0;">Search History</h3>
+        <ion-button size="small" fill="clear" style="color: var(--button-bg);" (click)="clearSearchHistory()">
+          Clear
+        </ion-button>
+      </div>
+      <ion-list lines="none">
+        <ion-item *ngFor="let term of searchHistory" (click)="selectFromHistory(term)" class="history-item" style="--background: transparent; cursor: pointer; color: var(--text-color);">
+          <ion-icon name="time-outline" slot="start" color="medium"></ion-icon>
+          <ion-label style="color: var(--text-color);">{{ term }}</ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+
+  <!-- 分类选择 -->
+  <div class="ion-padding-top">
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 8px; white-space: nowrap;">
+      <div style="display: inline-flex; gap: 6px; padding: 0 4px;">
+        <button 
+          *ngFor="let category of categories" 
+          (click)="selectedCategory = category.value; onCategoryChange()"
+          [style.background-color]="selectedCategory === category.value ? 'var(--button-bg)' : 'transparent'"
+          [style.color]="selectedCategory === category.value ? 'white' : 'var(--text-color)'"
+          style="border: 1px solid var(--button-bg); border-radius: 16px; padding: 4px 12px; font-size: 11px; font-weight: 500; cursor: pointer; transition: all 0.3s ease;"
+        >
+          {{ category.label }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 列表卡片式布局 -->
+  <ion-list class="ion-padding-top">
+    <ion-card *ngFor="let item of items" class="shadow hover-lift" style="background-color: var(--card-bg); color: var(--text-color);">
+      <ion-card-header style="background-color: var(--card-header-bg);">
+        <ion-card-title class="fw-bold">{{ item.item_name }}</ion-card-title>
+        <ion-card-subtitle>ID: {{ item.item_id }} | {{ item.category }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="d-flex justify-between">
+          <span>💰 Price: ${{ item.price }}</span>
+          <span [ngClass]="{'text-success': item.stock_status === 'In stock', 'text-danger': item.stock_status !== 'In stock'}">
+            {{ item.stock_status }}
+          </span>
+        </div>
+        <p class="text-muted mt-2">Supplier: {{ item.supplier_name }}</p>
+        <ion-badge color="tertiary" *ngIf="item.featured_item === 1">Featured</ion-badge>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+  <!-- 空状态提示 -->
+  <div *ngIf="items.length === 0" class="ion-text-center ion-padding">
+    <ion-icon name="cube-outline" size="large" color="medium"></ion-icon>
+    <p class="text-muted">No items found</p>
+  </div>
+
+  <!-- 深色模式切换按钮 -->
+  <div class="ion-padding">
+    <ion-button expand="full" (click)="toggleDarkMode()" style="background-color: var(--button-bg); color: white;">
+      <ion-icon [name]="isDarkMode ? 'sunny-outline' : 'moon-outline'" slot="start"></ion-icon>
+      {{ isDarkMode ? 'Light Mode' : 'Dark Mode' }}
+    </ion-button>
+  </div>
+</ion-content>

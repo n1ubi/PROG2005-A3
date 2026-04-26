@@ -1,0 +1,126 @@
+<ion-header>
+  <ion-toolbar style=" color: white; display: flex; justify-content: center; align-items: center;">
+    <ion-title style="position: absolute; text-align: center; left: 0; right: 0; margin: 0 auto; font-weight: bold;">Edit & Delete</ion-title>
+    <ion-button slot="end" color="green" (click)="showHelp()">HELP</ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="background-color: var(--bg-color); color: var(--text-color);">
+  <!-- Search Section -->
+  <div style="background-color: var(--card-bg); margin: 16px; border-radius: 8px; padding: 16px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+    <h2 style="text-align: center; margin-bottom: 16px; color: var(--button-bg);">
+      <ion-icon name="search-outline" style="margin-right: 8px;"></ion-icon>
+      Search Item
+    </h2>
+    <ion-item style="--background: var(--card-bg); border-radius: 4px;">
+      <ion-input 
+        [(ngModel)]="item_name" 
+        placeholder="Enter item name" 
+        style="color: var(--text-color);"
+        (ionChange)="searchItems()"
+      ></ion-input>
+    </ion-item>
+    <ion-button 
+      expand="full" 
+      style="margin-top: 16px; background-color: var(--button-bg); color: white; font-weight: bold;"
+      (click)="load()"
+    >
+      <ion-icon name="search"></ion-icon>
+      Search Item
+    </ion-button>
+    
+    <!-- 搜索结果列表 -->
+    <div *ngIf="searchResults.length > 0" style="margin-top: 16px; max-height: 200px; overflow-y: auto; border: 1px solid rgba(0, 150, 163, 0.2); border-radius: 4px;">
+      <ion-list lines="full">
+        <ion-item *ngFor="let item of searchResults" (click)="selectItem(item)" style="--background: var(--card-bg); cursor: pointer; transition: background-color 0.2s ease;">
+          <ion-label style="color: var(--text-color);">
+            <h3>{{ item.item_name }}</h3>
+            <p style="font-size: 12px; opacity: 0.8;">{{ item.category }} | ${{ item.price }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+    
+    <p style="text-align: center; margin-top: 16px; font-size: 14px; color: var(--text-color); opacity: 0.8;">
+      Search for an item to edit or delete
+    </p>
+    <p style="text-align: center; font-size: 12px; color: var(--text-color); opacity: 0.6;">
+      Laptops cannot be deleted
+    </p>
+  </div>
+
+  <!-- Edit Section -->
+  <div style="background-color: var(--card-bg); margin: 16px; border-radius: 8px; padding: 16px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+    <h2 style="text-align: center; margin-bottom: 16px; color: var(--button-bg);">
+      <ion-icon name="create-outline" style="margin-right: 8px;"></ion-icon>
+      Edit Information
+    </h2>
+    
+    <ion-item style="--background: var(--card-bg); border-radius: 4px; margin-bottom: 12px;">
+      <ion-select 
+        label="Category" 
+        [(ngModel)]="category"
+        style="color: var(--text-color);"
+      >
+        <ion-select-option value="Electronics">Electronics</ion-select-option>
+        <ion-select-option value="Furniture">Furniture</ion-select-option>
+        <ion-select-option value="Clothing">Clothing</ion-select-option>
+        <ion-select-option value="Tools">Tools</ion-select-option>
+        <ion-select-option value="Miscellaneous">Miscellaneous</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item style="--background: var(--card-bg); border-radius: 4px; margin-bottom: 12px;">
+      <ion-input 
+        label="Quantity" 
+        type="number" 
+        [(ngModel)]="quantity"
+        style="color: var(--text-color);"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item style="--background: var(--card-bg); border-radius: 4px; margin-bottom: 12px;">
+      <ion-input 
+        label="Price" 
+        type="number" 
+        [(ngModel)]="price"
+        style="color: var(--text-color);"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item style="--background: var(--card-bg); border-radius: 4px; margin-bottom: 12px;">
+      <ion-input 
+        label="Supplier Name" 
+        [(ngModel)]="supplier_name"
+        style="color: var(--text-color);"
+      ></ion-input>
+    </ion-item>
+
+    <div style="display: flex; gap: 12px; margin-top: 24px;">
+      <ion-button 
+        expand="block" 
+        style="flex: 1; background-color: var(--button-bg); color: white; font-weight: bold;"
+        (click)="update()"
+      >
+        <ion-icon name="checkmark"></ion-icon>
+        Update Item
+      </ion-button>
+      <ion-button 
+        expand="block" 
+        style="flex: 1; background-color: var(--delete-button-bg); color: white; font-weight: bold;"
+        (click)="delete()"
+      >
+        <ion-icon name="trash"></ion-icon>
+        Delete Item
+      </ion-button>
+    </div>
+  </div>
+
+  <!-- 深色模式切换按钮 -->
+  <div class="ion-padding">
+    <ion-button expand="full" (click)="toggleDarkMode()" style="background-color: var(--button-bg); color: white;">
+      <ion-icon [name]="isDarkMode ? 'sunny-outline' : 'moon-outline'" slot="start"></ion-icon>
+      {{ isDarkMode ? 'Light Mode' : 'Dark Mode' }}
+    </ion-button>
+  </div>
+</ion-content>
